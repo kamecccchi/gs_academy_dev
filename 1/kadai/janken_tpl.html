@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>じゃんけん</title>
+<script>
+$(function(){
+//ここにJSを記述
+    
+    //id属性名を変数に保持
+    var pc   = "#pc_hands";
+    var jud  = "#judgment";
+    //判定
+    var win  = "勝ち";
+    var drw  = "引き分け";
+    var def  = "負け";
+    //手
+    var cho  = "チョキ";
+    var guu  = "グー";
+    var par  = "パー";
+
+    //localstrageから勝ち負け回数を取得
+    var winNum = localStorage.getItem("winNum") ? parseInt(localStorage.getItem("winNum")) : 0;
+    var drwNum = localStorage.getItem("drwNum") ? parseInt(localStorage.getItem("drwNum")) : 0;
+    var defNum = localStorage.getItem("defNum") ? parseInt(localStorage.getItem("defNum")) : 0;
+    var count = localStorage.getItem("count") ? parseInt(localStorage.getItem("count")) : 0;
+
+    loadNum();
+
+    //あなたがチョキをクリックしたら
+    $("#cho_btn").on("click",function(){
+        //randには[0,1,2]の数値１つが代入される(重要：clickの中に書くこと)
+        //0=グー（負け）
+        var rand = Math.floor(Math.random()*3);
+        //結果[0:負け 1:かち 2:わけ]
+        var result;
+        if(rand==0){
+            $(pc).html(guu);
+            $(jud).html(def);
+            insertResult(def);
+        }
+        //1=チョキ（引き分け）
+        if(rand==1){
+            $(pc).html(cho);
+            $(jud).html(drw);
+            insertResult(drw);
+       }
+        //2=パー（勝ち）
+        if(rand==2){
+            $(pc).html(par);
+            $(jud).html(win);
+            insertResult(win);
+        }
+    });
+
+    //あなたがグーをクリックしたら
+    $("#gu_btn").on("click",function(){
+        //randには[0,1,2]の数値１つが代入される(重要：clickの中に書くこと)
+        //0=グー（引き分け）
+        var rand = Math.floor(Math.random()*3);
+        if(rand==0){
+            $(pc).html(guu);
+            $(jud).html(drw);
+            insertResult(drw);
+        }
+        //1=チョキ（勝ち）
+        if(rand==1){
+            $(pc).html(cho);
+            $(jud).html(win);
+            insertResult(win);
+      }
+        //2=パー（負け）
+        if(rand==2){
+            $(pc).html(par);
+            $(jud).html(def);
+            insertResult(def);
+        }
+    });
+
+    //あなたがパーをクリックしたら
+    $("#par_btn").on("click",function(){
+        //randには[0,1,2]の数値１つが代入される(重要：clickの中に書くこと)
+        //0=グー（勝ち）
+        var rand = Math.floor(Math.random()*3);
+        if(rand==0){
+            $(pc).html(guu);
+            $(jud).html(win);
+            insertResult(win);
+        }
+        //1=チョキ（負け）
+        if(rand==1){
+            $(pc).html(cho);
+            $(jud).html(def);
+            insertResult(def);
+        }
+        //2=パー（引き分け）
+        if(rand==2){
+            $(pc).html(par);
+            $(jud).html(drw);
+            insertResult(drw);
+        }
+    });
+
+    function insertResult(result){
+ 
+        if (result == win) {
+            winNum = winNum + 1;
+        }else if (result == def) {
+            defNum = defNum + 1;
+        }else {
+            drwNum = drwNum + 1;
+        }
+
+        count = count + 1;
+
+        //対戦回数100回超えるごとにリセットするかきく
+        if (count % 100 == 0) {
+            var res = confirm("対戦が" + count + "回超えましたー続けますか？");
+            if (res) {
+                 //ローカルストレージに勝ち負け回数をセット
+                localStorage.setItem("winNum",winNum);
+                localStorage.setItem("defNum",defNum);
+                localStorage.setItem("drwNum",drwNum);
+                localStorage.setItem("count",count);
+            } else {
+                localStorage.setItem("winNum",0);
+                localStorage.setItem("defNum",0);
+                localStorage.setItem("drwNum",0);
+                localStorage.setItem("count",0);
+                winNum = 0;
+                defNum = 0;
+                drwNum = 0;
+                count = 0;
+            }
+        } else {
+            //ローカルストレージに勝ち負け回数をセット
+            localStorage.setItem("winNum",winNum);
+            localStorage.setItem("defNum",defNum);
+            localStorage.setItem("drwNum",drwNum);
+            localStorage.setItem("count",count);
+        }
+
+        loadNum();
+    }
+
+    function loadNum() {
+        $("#win_num").html(winNum);
+        $("#drw_num").html(drwNum);
+        $("#def_num").html(defNum);
+        $("#win_per").html(Math.floor( winNum / (winNum + defNum + drwNum) * 100 ? winNum / (winNum + defNum + drwNum) * 100 : 0) + "%");
+        $("#count").html(count);
+    }
+});
+</script>
+</head>
+<body>
+
+<header>
+  <h1>じゃんけん</h1>
+</header>
+
+<main>
+  <ul>
+    <li id="gu_btn">グー</li>
+    <li id="cho_btn">チョキ</li>
+    <li id="par_btn">パー</li>
+  </ul>
+  <div>コンピュータの出した手は？「<span id="pc_hands">なに？</span>」</div>
+  <div id="judgment">勝ち</div>
+  <div id="result">
+    <div>結果</div>
+    <div id="win">勝ち:<span id="win_num"></span></div>
+    <div id="drw">分け:<span id="drw_num"></span></div>
+    <div id="def">負け:<span id="def_num"></span></div>    
+    <div id="def">勝率:<span id="win_per"></span></div>    
+    <div id="def">対戦回数:<span id="count"></span></div>    
+  </div>
+</main>
+
+<footer></footer>
+
+</body>
+</html>
