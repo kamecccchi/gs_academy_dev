@@ -1,3 +1,252 @@
+body {
+	font-size: 16px;
+	color: #222222;
+}
+input[type="text"] {
+	margin: 8px;
+	width: 328px;
+	height: 36px;
+	border: 1px solid #BFBFBF;
+}
+textarea {
+	margin: 8px;
+	width: 328px;
+	border: 1px solid #BFBFBF;
+	resize: none;	
+}
+a, a:hover, a:visited, a:link, a:active {
+color: #222222;
+}
+.list li:hover {
+	filter:alpha(opacity=80);
+	opacity:0.8;
+	cursor : pointer;
+}
+.ul_piz_list li:hover {
+	filter:alpha(opacity=80);
+	opacity:0.8;
+	cursor : pointer;
+}
+#header_img {
+	display: flex;
+	margin: 20px 30px;
+	float: left;
+}
+ #header_list {
+	display: flex;
+	margin: 50px 30px; 	
+ 	float: right;
+ 	font-size: 21px;
+}
 .list{
 	display: flex;
+}
+.list li {
+	margin: 0 25px;
+}
+#mainvisual {
+	clear: both;
+	background-image: url(../images/mainbg.png);
+	text-align: center;
+}
+.title {
+	font-size: 24px;
+	color: #FFD61A;
+}
+.sub_title {
+	font-size: 18px;
+}
+#box_contents {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.course_list_left {
+	display: flex;
+}
+.course_list_right {
+	display: flex;
+}
+.course_list_left li {
+	width: 50%;
+	text-align: left;
+}
+.course_list_right li {
+	width: 50%;
+	text-align: right;
+}
+.course_detail_left {
+	width: 280px;
+	padding-left: 50px;
+	padding-top: 120px;
+}
+.course_detail_right {
+	width: 280px;
+	padding-right: 50px;
+	padding-top: 120px;
+}
+.ul_piz_list {
+	display: flex;
+}
+#piz_img {
+	width: auto;
+    height: auto;
+    max-width:100%;
+    max-height:100%;
+}
+.button_background {
+	display: flex;
+	background-color: #FFD61A;
+	align-items: center;
+	justify-content: center;
+	margin: auto;
+	width: 300px;
+	height: 60px;
+	text-align: center;
+	font-size: 18px;
+	color: white;
+	font-weight: bold;
+}
+.button_background:hover {
+	filter:alpha(opacity=80);
+	opacity:0.8;
+	cursor : pointer;
+}
+
+table#info_table {
+	border-collapse: collapse;
+	margin: auto;
+	text-align: left;
+	line-height: 1.5;
+}
+table#info_table th {
+	padding: 15px 50px 15px 0;
+	font-weight: lighter;
+	vertical-align: top;
+}
+table#info_table td {
+	padding: 15px 0;
+	vertical-align: top;
+}
+table#form_table {
+	border-collapse: collapse;
+	margin: auto;
+	text-align: left;
+	line-height: 1.5;
+}
+table#form_table th {
+	width: 240px;
+	font-weight: lighter;
+	vertical-align: top;
+	border: 1px solid #BFBFBF;
+}
+table#form_table td {
+	width: 400px;
+	padding: 8px;
+	vertical-align: top;
+	border: 1px solid #BFBFBF;
+}
+.td_text {
+	margin: 8px 64px auto 16px;
+}
+#footer {
+	background-color: #707070;
+	padding: 30px 0;
+	text-align: center;
+	color: white;
+}
+input[type=checkbox] {
+  display: none;
+}
+.check_css {
+  -webkit-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+  position: relative;
+  display: inline-block;
+  padding: 0 0 0 42px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.check_css:hover:after {
+  border-color: #0171bd;
+}
+.check_css:after {
+  -webkit-transition: border-color 0.2s linear;
+  transition: border-color 0.2s linear;
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  display: block;
+  margin-top: -10px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  content: '';
+}
+.check_css:before {
+  -webkit-transition: opacity 0.2s linear;
+  transition: opacity 0.2s linear;
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  display: block;
+  margin-top: -7px;
+  width: 5px;
+  height: 9px;
+  border-right: 3px solid #0171bd;
+  border-bottom: 3px solid #0171bd;
+  content: '';
+  opacity: 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+input[type=checkbox]:checked + .check_css:before {
+  opacity: 1;
+}
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    height: 30px;
+    width: 330px;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+    padding: 0 40px 0 10px;
+    border: 1px solid #ccc;
+}
+select::-ms-expand {
+    display: none;
+}
+.selectWrap{
+    position: relative;
+    display: inline-block;
+	margin: 8px;
+}
+.selectWrap::before{
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    background: #ccc;
+    height: 100%;
+    width: 30px;
+}
+.selectWrap::after{
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    right: 9px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 6px 0 6px;
+    border-color: #fff transparent transparent transparent; 
 }
