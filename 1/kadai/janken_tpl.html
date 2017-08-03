@@ -8,16 +8,13 @@
 <title>じゃんけん</title>
 <script>
 $(function(){
-//ここにJSを記述
     
-    //id属性名を変数に保持
-    var pc   = "#pc_hands";
-    var jud  = "#judgment";
     //判定
     var win  = "勝ち";
     var drw  = "引き分け";
     var def  = "負け";
-    //手
+
+    //相手の出した手
     var cho  = "チョキ";
     var guu  = "グー";
     var par  = "パー";
@@ -30,76 +27,57 @@ $(function(){
 
     loadNum();
 
-    //あなたがチョキをクリックしたら
+    //チョキ
     $("#cho_btn").on("click",function(){
-        //randには[0,1,2]の数値１つが代入される(重要：clickの中に書くこと)
-        //0=グー（負け）
         var rand = Math.floor(Math.random()*3);
-        //結果[0:負け 1:かち 2:わけ]
         var result;
-        if(rand==0){
-            $(pc).html(guu);
-            $(jud).html(def);
+        if (rand==0) {
+            $("#aite").html(guu);
+            $("#num").html(def);
             insertResult(def);
-        }
-        //1=チョキ（引き分け）
-        if(rand==1){
-            $(pc).html(cho);
-            $(jud).html(drw);
+        }else if (rand==1) {
+            $("#aite").html(cho);
+            $("#num").html(drw);
             insertResult(drw);
-       }
-        //2=パー（勝ち）
-        if(rand==2){
-            $(pc).html(par);
-            $(jud).html(win);
+        }else {
+            $("#aite").html(par);
+            $("#num").html(win);
             insertResult(win);
         }
     });
 
-    //あなたがグーをクリックしたら
+    //グー
     $("#gu_btn").on("click",function(){
-        //randには[0,1,2]の数値１つが代入される(重要：clickの中に書くこと)
-        //0=グー（引き分け）
         var rand = Math.floor(Math.random()*3);
-        if(rand==0){
-            $(pc).html(guu);
-            $(jud).html(drw);
+        if (rand==0) {
+            $("#aite").html(guu);
+            $("#num").html(drw);
             insertResult(drw);
-        }
-        //1=チョキ（勝ち）
-        if(rand==1){
-            $(pc).html(cho);
-            $(jud).html(win);
+        }else if (rand==1) {
+            $("#aite").html(cho);
+            $("#num").html(win);
             insertResult(win);
-      }
-        //2=パー（負け）
-        if(rand==2){
-            $(pc).html(par);
-            $(jud).html(def);
+        }else {
+            $("#aite").html(par);
+            $("#num").html(def);
             insertResult(def);
         }
     });
 
-    //あなたがパーをクリックしたら
+    //パー
     $("#par_btn").on("click",function(){
-        //randには[0,1,2]の数値１つが代入される(重要：clickの中に書くこと)
-        //0=グー（勝ち）
         var rand = Math.floor(Math.random()*3);
-        if(rand==0){
-            $(pc).html(guu);
-            $(jud).html(win);
+        if (rand==0) {
+            $("#aite").html(guu);
+            $("#num").html(win);
             insertResult(win);
-        }
-        //1=チョキ（負け）
-        if(rand==1){
-            $(pc).html(cho);
-            $(jud).html(def);
+        }else if (rand==1) {
+            $("#aite").html(cho);
+            $("#num").html(def);
             insertResult(def);
-        }
-        //2=パー（引き分け）
-        if(rand==2){
-            $(pc).html(par);
-            $(jud).html(drw);
+        }else {
+            $("#aite").html(par);
+            $("#num").html(drw);
             insertResult(drw);
         }
     });
@@ -120,7 +98,7 @@ $(function(){
         if (count % 100 == 0) {
             var res = confirm("対戦が" + count + "回超えましたー続けますか？");
             if (res) {
-                 //ローカルストレージに勝ち負け回数をセット
+                //ローカルストレージに勝ち負け回数をセット
                 localStorage.setItem("winNum",winNum);
                 localStorage.setItem("defNum",defNum);
                 localStorage.setItem("drwNum",drwNum);
@@ -168,8 +146,9 @@ $(function(){
     <li id="cho_btn">チョキ</li>
     <li id="par_btn">パー</li>
   </ul>
-  <div>コンピュータの出した手は？「<span id="pc_hands">なに？</span>」</div>
-  <div id="judgment">勝ち</div>
+  <div>コンピュータの出した手は？</div>
+  <div id="aite"></div>
+  <div id="num">勝ち</div>
   <div id="result">
     <div>結果</div>
     <div id="win">勝ち:<span id="win_num"></span></div>
